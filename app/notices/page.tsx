@@ -9,9 +9,17 @@ function formatDate(d?: string | null) {
 }
 
 export default async function NoticesPage() {
-  const res = await fetch(await absoluteUrl("/api/notices?published=1"), { cache: "no-store" });
-  const data = await res.json();
-  const notices: Notice[] = data.items || [];
+  let notices: Notice[] = [];
+  try {
+    const url = await absoluteUrl("/api/notices?published=1");
+    const res = await fetch(url, { cache: "no-store" });
+    if (res.ok) {
+      const data = await res.json();
+      notices = (data.items as Notice[]) || [];
+    }
+  } catch (_) {
+    // Swallow and show empty state
+  }
   return (
     <div className="space-y-6">
       <h1 className="text-2xl font-semibold text-blue-600">Notices</h1>

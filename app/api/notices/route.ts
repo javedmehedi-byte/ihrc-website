@@ -1,15 +1,24 @@
 import fs from "fs";
 import path from "path";
 import { NextResponse } from "next/server";
+import type { NextRequest } from "next/server";
 import nodemailer from "nodemailer";
 import { db } from "@/lib/db";
 
-const uploadDir = path.join(process.cwd(), "uploads");
-if (!fs.existsSync(uploadDir)) {
-  fs.mkdirSync(uploadDir); // Create the uploads directory if it doesn't exist
+// Use a safe temp directory in production (e.g., Vercel serverless)
+const baseUploadDir = process.env.NODE_ENV === "production" ? "/tmp" : process.cwd();
+const uploadDir = path.join(baseUploadDir, "uploads");
+
+async function ensureUploadsDir() {
+  try {
+    await fs.promises.mkdir(uploadDir, { recursive: true });
+  } catch {
+    // ignore
+  }
 }
 
 const saveFile = async (file: File, fileName: string) => {
+  await ensureUploadsDir();
   const filePath = path.join(uploadDir, fileName);
   const fileStream = fs.createWriteStream(filePath);
   const readable = file.stream();
@@ -28,13 +37,11 @@ const saveFile = async (file: File, fileName: string) => {
   return filePath; // Return the file path for storage in the database
 };
 
-export async function GET() {
+export async function GET(_request: NextRequest) {
   const items = await db.notice.findMany({
-    orderBy: [
-      { publishedAt: "desc" }
-    ],
+    orderBy: [{ publishedAt: "desc" }],
   });
-    return NextResponse.json({ items }); // This line is unchanged
+  return NextResponse.json({ items });
 }
 
 export async function POST(req: Request) {
