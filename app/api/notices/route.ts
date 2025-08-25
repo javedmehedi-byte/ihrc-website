@@ -28,7 +28,7 @@ const saveFile = async (file: File, fileName: string) => {
   return filePath; // Return the file path for storage in the database
 };
 
-export async function GET(_req: Request) {
+export async function GET() {
   const items = await db.notice.findMany({
     orderBy: [
       { publishedAt: "desc" }
@@ -117,7 +117,7 @@ export async function POST(req: Request) {
   };
 
   try {
-  const _item = await db.applicant.create({ data: applicantData });
+  await db.applicant.create({ data: applicantData });
   } catch (error) {
     console.error("Failed to save applicant data:", error);
     return NextResponse.json({ error: "Failed to save applicant data" }, { status: 500 });

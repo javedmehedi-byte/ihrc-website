@@ -2,7 +2,7 @@
 
 import React from "react";
 
-export default function GlobalError({ error: _error, reset }: { error: Error; reset: () => void }) {
+export default function GlobalError({ reset }: { error: Error; reset: () => void }) {
   return (
     <html>
       <body className="flex flex-col items-center justify-center min-h-screen bg-red-50 text-red-900">
