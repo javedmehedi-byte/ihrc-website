@@ -34,7 +34,7 @@ export async function GET() {
       { publishedAt: "desc" }
     ],
   });
-  return NextResponse.json({ items });
+    return NextResponse.json({ items }); // This line is unchanged
 }
 
 export async function POST(req: Request) {
@@ -117,7 +117,7 @@ export async function POST(req: Request) {
   };
 
   try {
-  await db.applicant.create({ data: applicantData });
+    await db.applicant.create({ data: applicantData });
   } catch (error) {
     console.error("Failed to save applicant data:", error);
     return NextResponse.json({ error: "Failed to save applicant data" }, { status: 500 });
