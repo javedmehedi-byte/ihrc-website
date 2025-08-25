@@ -3,7 +3,8 @@ import Link from "next/link";
 import type { Metadata } from "next";
 import { site } from "@/config/site";
 
-type Params = Promise<{ code: string }> | { code: string };
+// Next.js 15: params is a Promise in server components
+type Params = Promise<{ code: string }>;
 
 export async function generateMetadata({ params }: { params: Params }): Promise<Metadata> {
   const p = await params;
