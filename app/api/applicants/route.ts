@@ -4,12 +4,20 @@ import { NextResponse } from "next/server";
 import nodemailer from "nodemailer";
 import { db } from "@/lib/db";
 
-const uploadDir = path.join(process.cwd(), "uploads");
-if (!fs.existsSync(uploadDir)) {
-  fs.mkdirSync(uploadDir); // Create the uploads directory if it doesn't exist
+// Use a safe temp directory in production (e.g., Vercel serverless)
+const baseUploadDir = process.env.NODE_ENV === "production" ? "/tmp" : process.cwd();
+const uploadDir = path.join(baseUploadDir, "uploads");
+
+async function ensureUploadsDir() {
+  try {
+    await fs.promises.mkdir(uploadDir, { recursive: true });
+  } catch {
+    // ignore mkdir errors; we'll error when writing if truly unavailable
+  }
 }
 
 const saveFile = async (file: File, fileName: string) => {
+  await ensureUploadsDir();
   const filePath = path.join(uploadDir, fileName);
   const fileStream = fs.createWriteStream(filePath);
   const readable = file.stream();
