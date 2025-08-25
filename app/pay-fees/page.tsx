@@ -2,6 +2,22 @@
 
 import { useState } from "react";
 
+// Minimal types for Razorpay Checkout to avoid using `any`
+type RazorpayOptions = {
+  key: string;
+  amount: number;
+  currency: string;
+  order_id: string;
+  name?: string;
+  description?: string;
+  prefill?: { name?: string; email?: string; contact?: string };
+  notes?: Record<string, string>;
+  handler?: () => void;
+  modal?: { ondismiss?: () => void };
+};
+interface RazorpayInstance { open: () => void }
+interface RazorpayConstructor { new (options: RazorpayOptions): RazorpayInstance }
+
 export default function PayFeesPage() {
   const [formData, setFormData] = useState({
     courseName: "",
@@ -50,8 +66,8 @@ export default function PayFeesPage() {
         return;
       }
 
-  const RazorpayCtor = (window as any).Razorpay;
-  const r = new RazorpayCtor({
+  const { Razorpay } = window as unknown as { Razorpay: RazorpayConstructor };
+  const r = new Razorpay({
         key: data.keyId,
         amount: data.amount,
         currency: data.currency,
