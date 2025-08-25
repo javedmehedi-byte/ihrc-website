@@ -3,17 +3,20 @@ import nodemailer from "nodemailer";
 import fs from "fs";
 import path from "path";
 
+// Ensure Node runtime for crypto/fs/nodemailer
+export const runtime = "nodejs";
+
 export async function POST(req: Request) {
   const body = await req.json();
   const razorpaySignature = req.headers.get("x-razorpay-signature");
 
-  // Verify Razorpay signature (optional for security)
+  // Verify Razorpay signature using Webhook Secret (not API key secret)
   const { createHmac } = await import("crypto");
-  const keySecret = process.env.RAZORPAY_KEY_SECRET;
-  if (!keySecret) {
-    throw new Error("RAZORPAY_KEY_SECRET is not set in environment variables");
+  const webhookSecret = process.env.RAZORPAY_WEBHOOK_SECRET;
+  if (!webhookSecret) {
+    return NextResponse.json({ error: "Missing webhook secret" }, { status: 500 });
   }
-  const generatedSignature = createHmac("sha256", keySecret)
+  const generatedSignature = createHmac("sha256", webhookSecret)
     .update(JSON.stringify(body))
     .digest("hex");
 
@@ -37,7 +40,9 @@ export async function POST(req: Request) {
     };
 
     // Generate receipt as a PDF or text file
-    const receiptPath = path.join(process.cwd(), "receipts", `receipt_${receiptData.paymentId}.txt`);
+  // Use /tmp in serverless; process.cwd() is read-only in Vercel runtime
+  const baseDir = process.env.NODE_ENV === "production" ? "/tmp" : process.cwd();
+  const receiptPath = path.join(baseDir, "receipts", `receipt_${receiptData.paymentId}.txt`);
     if (!fs.existsSync(path.dirname(receiptPath))) {
       fs.mkdirSync(path.dirname(receiptPath), { recursive: true });
     }
