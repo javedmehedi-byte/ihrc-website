@@ -11,15 +11,18 @@ function formatDateTime(d?: string | null) {
 
 // Use Next.js built-in PageProps type for dynamic routes
 
-export async function generateMetadata({ params }: { params: { slug: string } }) {
-  // Optionally fetch notice for dynamic title/description
+
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params;
   return {
-    title: `Notice: ${params.slug}`,
+    title: `Notice: ${slug}`,
   };
 }
 
-export default async function NoticeDetail({ params }: { params: { slug: string } }) {
-  const url = await absoluteUrl(`/api/notices/${params.slug}`);
+
+export default async function NoticeDetail({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params;
+  const url = await absoluteUrl(`/api/notices/${slug}`);
   const res = await fetch(url, { cache: "no-store" });
   if (!res.ok) return <div className="text-red-600">Notice not found.</div>;
   const n: Notice = await res.json();
