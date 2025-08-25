@@ -96,7 +96,7 @@ export async function POST(req: Request) {
   };
 
   try {
-    const item = await db.applicant.create({ data: applicantData });
+  const _item = await db.applicant.create({ data: applicantData });
   } catch (error) {
     console.error("Failed to save applicant data:", error);
     return NextResponse.json({ error: "Failed to save applicant data" }, { status: 500 });
