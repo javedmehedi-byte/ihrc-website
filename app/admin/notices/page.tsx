@@ -153,7 +153,7 @@ export default function AdminNotices() {
             </tr>
           </thead>
         <tbody>
-          {items.map((n: any) => (
+          {items.map((n: Record<string, any>) => (
             <tr key={n.id} className="border-t">
               <td className="py-2">{n.title}</td>
               <td className="py-2">{n.category}</td>

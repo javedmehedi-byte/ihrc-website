@@ -8,9 +8,12 @@ export async function POST(req: Request) {
   const razorpaySignature = req.headers.get("x-razorpay-signature");
 
   // Verify Razorpay signature (optional for security)
-  const crypto = require("crypto");
-  const generatedSignature = crypto
-    .createHmac("sha256", process.env.RAZORPAY_KEY_SECRET)
+  const { createHmac } = await import("crypto");
+  const keySecret = process.env.RAZORPAY_KEY_SECRET;
+  if (!keySecret) {
+    throw new Error("RAZORPAY_KEY_SECRET is not set in environment variables");
+  }
+  const generatedSignature = createHmac("sha256", keySecret)
     .update(JSON.stringify(body))
     .digest("hex");
 

@@ -13,12 +13,17 @@ const saveFile = async (file: File, fileName: string) => {
   const filePath = path.join(uploadDir, fileName);
   const fileStream = fs.createWriteStream(filePath);
   const readable = file.stream();
-  const nodeStream = require('stream').Readable.from(readable as any);
-  await new Promise((resolve, reject) => {
-    nodeStream.pipe(fileStream);
-    fileStream.on('finish', () => resolve(undefined));
-    fileStream.on('error', reject);
-  });
+  // Convert web ReadableStream to Node.js stream
+  const reader = readable.getReader();
+  async function pump() {
+    while (true) {
+      const { done, value } = await reader.read();
+      if (done) break;
+      fileStream.write(Buffer.from(value));
+    }
+    fileStream.end();
+  }
+  await pump();
   return filePath; // Return the file path for storage in the database
 };
 

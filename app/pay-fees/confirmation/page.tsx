@@ -1,3 +1,4 @@
+import Link from "next/link";
 "use client";
 
 export default function PaymentConfirmationPage() {
@@ -6,12 +7,12 @@ export default function PaymentConfirmationPage() {
       <h1 className="text-2xl font-bold mb-4">Payment Successful!</h1>
       <p className="text-lg mb-4">Thank you for your payment. A receipt has been sent to your email.</p>
       <p className="text-lg mb-4">If you need to download the receipt again, please contact the admin.</p>
-      <a
+      <Link
         href="/"
         className="block text-center bg-blue-600 text-white rounded-lg px-4 py-2 mt-4"
       >
         Go Back to Home
-      </a>
+      </Link>
     </div>
   );
 }

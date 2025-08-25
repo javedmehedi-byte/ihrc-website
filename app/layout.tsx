@@ -18,27 +18,27 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <header className="border-b bg-blue-700 text-white">
           <nav className="max-w-5xl mx-auto px-4 py-3 flex gap-3 items-center flex-wrap">
             <div className="flex items-center gap-3">
-              <img src="/logo.png" alt="IHRC Logo" className="h-10 rounded-md" />
+              <Image src="/logo.png" alt="IHRC Logo" className="h-10 rounded-md" width={40} height={40} />
               <Link href="/" className="font-extrabold text-lg md:text-xl tracking-wide">
                 IHRC PARAMEDICAL COLLEGE
               </Link>
             </div>
             <div className="flex gap-3 ml-auto">
-              <a href="/notices" className="px-3 py-2 bg-blue-600 hover:bg-blue-500 rounded-lg text-white font-bold text-sm">
+              <Link href="/notices" className="px-3 py-2 bg-blue-600 hover:bg-blue-500 rounded-lg text-white font-bold text-sm">
                 Notices
-              </a>
-              <a href="/results" className="px-3 py-2 bg-blue-600 hover:bg-blue-500 rounded-lg text-white font-bold text-sm">
+              </Link>
+              <Link href="/results" className="px-3 py-2 bg-blue-600 hover:bg-blue-500 rounded-lg text-white font-bold text-sm">
                 Results
-              </a>
-              <a href="/admissions/apply" className="px-3 py-2 bg-blue-600 hover:bg-blue-500 rounded-lg text-white font-bold text-sm">
+              </Link>
+              <Link href="/admissions/apply" className="px-3 py-2 bg-blue-600 hover:bg-blue-500 rounded-lg text-white font-bold text-sm">
                 Admissions
-              </a>
-              <a href="/pay-fees" className="px-3 py-2 bg-blue-600 hover:bg-blue-500 rounded-lg text-white font-bold text-sm">
+              </Link>
+              <Link href="/pay-fees" className="px-3 py-2 bg-blue-600 hover:bg-blue-500 rounded-lg text-white font-bold text-sm">
                 Pay Fees
-              </a>
-              <a href="/admin" className="px-3 py-2 bg-blue-600 hover:bg-blue-500 rounded-lg text-white font-bold text-sm">
+              </Link>
+              <Link href="/admin" className="px-3 py-2 bg-blue-600 hover:bg-blue-500 rounded-lg text-white font-bold text-sm">
                 Admin
-              </a>
+              </Link>
             </div>
           </nav>
         </header>
