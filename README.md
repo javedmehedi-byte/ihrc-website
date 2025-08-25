@@ -19,10 +19,11 @@ This is the official website for IHRC Paramedical College, built with Next.js, T
 	```bash
 	npm install
 	```
-2. Set up your `.env` file with the required environment variables:
-	- `DATABASE_URL` (for Prisma/SQLite)
-	- `ADMIN_SESSION_SECRET`
-	- `EMAIL_USER`, `EMAIL_PASS`, `ADMIN_EMAIL` (for notifications)
+2. Create `.env` (or use `.env.example`) with:
+	- `DATABASE_URL` (PostgreSQL recommended in production)
+	- `ADMIN_PASSWORD`, `ADMIN_SESSION_SECRET`
+	- `EMAIL_USER`, `EMAIL_PASS`, `ADMIN_EMAIL`
+	- `RAZORPAY_KEY_ID`, `RAZORPAY_KEY_SECRET`, `NEXT_PUBLIC_RAZORPAY_KEY_ID`
 3. Run database migrations:
 	```bash
 	npm run prisma
@@ -43,7 +44,7 @@ This is the official website for IHRC Paramedical College, built with Next.js, T
 
 ## Deployment
 
-You can deploy this app to Vercel, Netlify, or any Node.js hosting provider. For production, use a robust database (e.g., PostgreSQL) instead of SQLite.
+Deploy to Vercel. Set the same env vars in Vercel Project Settings → Environment Variables, then redeploy. Serverless FS is ephemeral; uploads are written to `/tmp` at request-time.
 
 ## License
 
