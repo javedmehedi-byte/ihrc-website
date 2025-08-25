@@ -1,3 +1,4 @@
+
 import { absoluteUrl } from "@/lib/url";
 
 type Notice = { id: string; title: string; slug: string; category: string; body: string; attachment?: string | null; publishedAt: string | null };
@@ -8,8 +9,20 @@ function formatDateTime(d?: string | null) {
   return dt.slice(0, 10) + " " + dt.slice(11, 16) + " UTC";
 }
 
-export default async function NoticeDetail({ params }: { params: { slug: string } }) {
-  const res = await fetch(absoluteUrl(`/api/notices/${params.slug}`), { cache: "no-store" });
+interface NoticeDetailPageProps {
+  params: { slug: string };
+}
+
+export async function generateMetadata({ params }: NoticeDetailPageProps) {
+  // Optionally fetch notice for dynamic title/description
+  return {
+    title: `Notice: ${params.slug}`,
+  };
+}
+
+export default async function NoticeDetail({ params }: NoticeDetailPageProps) {
+  const url = await absoluteUrl(`/api/notices/${params.slug}`);
+  const res = await fetch(url, { cache: "no-store" });
   if (!res.ok) return <div className="text-red-600">Notice not found.</div>;
   const n: Notice = await res.json();
   return (
