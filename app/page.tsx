@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import { site } from "@/config/site";
 
 export default function HomePage() {
@@ -31,9 +32,10 @@ export default function HomePage() {
         <h2 className="text-2xl font-semibold">Our Courses</h2>
         <div className="grid md:grid-cols-3 gap-6">
           {site.courses.map((c) => (
-            <div
+            <Link
               key={c.code}
-              className="rounded-2xl border bg-white shadow overflow-hidden"
+              href={`/courses/${c.code.toLowerCase()}`}
+              className="card-3d overflow-hidden hover:shadow-xl"
             >
               <Image
                 src={c.image}
@@ -43,10 +45,10 @@ export default function HomePage() {
                 className="h-40 w-full object-cover"
               />
               <div className="p-5">
-                <h3 className="text-lg font-semibold text-blue-600">{c.code}</h3>
-                <p className="text-gray-800">{c.name}</p>
+                <h3 className="text-lg font-semibold text-blue-700">{c.code}</h3>
+                <p className="text-strong">{c.name}</p>
               </div>
-            </div>
+            </Link>
           ))}
         </div>
       </section>

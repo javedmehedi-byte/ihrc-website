@@ -24,6 +24,55 @@ body {
   font-family: Arial, Helvetica, sans-serif;
 }
 
+/* Stronger default text colors for readability in light mode sections */
+.text-strong { color: #0f172a; } /* slate-900 */
+.text-muted { color: #475569; }  /* slate-600 */
+
+/* Colorful 3D cards used across course pages */
+.card-3d {
+  background: #ffffffcc; /* slight translucency for depth */
+  border-radius: 1rem;   /* rounded-2xl */
+  border: 1px solid rgba(15, 23, 42, 0.06);
+  box-shadow:
+    0 10px 20px rgba(7, 44, 93, 0.06),
+    0 2px 6px rgba(7, 44, 93, 0.08);
+  transition: transform .2s ease, box-shadow .2s ease;
+}
+.card-3d:hover {
+  transform: translateY(-2px);
+  box-shadow:
+    0 14px 28px rgba(7, 44, 93, 0.10),
+    0 8px 10px rgba(7, 44, 93, 0.10);
+}
+
+/* Small colorful badge */
+.pill {
+  display: inline-flex;
+  align-items: center;
+  border-radius: 9999px;
+  padding: 0.25rem 0.625rem;
+  font-size: .68rem;
+  letter-spacing: .06em;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: #fff;
+  background: linear-gradient(135deg, #1e7fff, #0b68e6);
+  box-shadow: 0 4px 10px rgba(30, 127, 255, 0.35);
+}
+
+/* Section title helper */
+.section-title { color: #0a53b4; font-weight: 700; }
+
+/* Buttons (apply/pay) accent) */
+.btn-accent {
+  display: inline-flex; align-items: center; justify-content: center;
+  padding: 0.5rem 0.9rem; border-radius: 0.6rem;
+  background: linear-gradient(135deg, #1e7fff, #0b68e6);
+  color: #fff; font-weight: 600; border: none; cursor: pointer;
+  box-shadow: 0 6px 14px rgba(30,127,255,.35);
+}
+.btn-accent:hover { filter: brightness(1.05); }
+
 i {
   font-size: 1.2rem;
   color: var(--foreground);
@@ -110,16 +159,51 @@ i:hover {
 .header-link {
   display: inline-block;
   padding: 0.5rem 1rem;
-  background: linear-gradient(145deg, #1e7fff, #0b68e6); /* Gradient for 3D effect */
-  border-radius: 0.5rem;
-  box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.2), -4px -4px 8px rgba(255, 255, 255, 0.1); /* 3D shadow */
-  color: white;
-  font-weight: bold;
-  text-transform: uppercase;
-  transition: transform 0.2s, box-shadow 0.2s;
+  background: linear-gradient(160deg, #2a86ff, #0b68e6); /* vibrant gradient */
+  border-radius: 0.7rem;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  box-shadow:
+    0 10px 16px rgba(11, 104, 230, 0.35), /* drop shadow */
+    inset 0 1px 0 rgba(255, 255, 255, 0.35), /* top inner highlight */
+    inset 0 -4px 12px rgba(0, 0, 0, 0.15); /* bottom inner shade */
+  color: #fff;
+  font-weight: 700;
+  letter-spacing: 0.2px;
+  transition: transform 0.15s ease, box-shadow 0.15s ease, filter 0.15s ease;
 }
 
 .header-link:hover {
-  transform: translateY(-2px); /* Slight lift effect on hover */
-  box-shadow: 6px 6px 12px rgba(0, 0, 0, 0.3), -6px -6px 12px rgba(255, 255, 255, 0.2); /* Enhanced shadow */
+  transform: translateY(-2px); /* slight lift */
+  filter: brightness(1.05);
+  box-shadow:
+    0 14px 22px rgba(11, 104, 230, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.4),
+    inset 0 -4px 12px rgba(0, 0, 0, 0.18);
 }
+
+.header-link:active {
+  transform: translateY(0); /* pressed */
+  box-shadow:
+    0 6px 10px rgba(11, 104, 230, 0.3),
+    inset 0 2px 6px rgba(0, 0, 0, 0.25);
+}
+
+/* Reusable 3D buttons for CTAs */
+.btn-3d {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: .4rem;
+  padding: .55rem 1rem;
+  border-radius: .75rem;
+  background: linear-gradient(180deg, #3b82f6, #1d4ed8);
+  color: #fff;
+  font-weight: 700;
+  border: 0;
+  box-shadow: 0 10px 18px rgba(29,78,216,.28), inset 0 1px 0 rgba(255,255,255,.2);
+  transform: translateY(0);
+  transition: transform .15s ease, box-shadow .15s ease, filter .15s ease;
+}
+.btn-3d:hover { filter: brightness(1.05); box-shadow: 0 12px 22px rgba(29,78,216,.33), inset 0 1px 0 rgba(255,255,255,.25); }
+.btn-3d:active { transform: translateY(1px); }
+.btn-3d.btn-dark { background: linear-gradient(180deg, #0f172a, #0b1220); box-shadow: 0 10px 18px rgba(15,23,42,.35), inset 0 1px 0 rgba(255,255,255,.08); }

@@ -24,19 +24,19 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               </Link>
             </div>
             <div className="flex gap-3 ml-auto">
-              <Link href="/notices" className="px-3 py-2 bg-blue-600 hover:bg-blue-500 rounded-lg text-white font-bold text-sm">
+              <Link href="/notices" className="header-link">
                 Notices
               </Link>
-              <Link href="/results" className="px-3 py-2 bg-blue-600 hover:bg-blue-500 rounded-lg text-white font-bold text-sm">
+              <Link href="/results" className="header-link">
                 Results
               </Link>
-              <Link href="/admissions/apply" className="px-3 py-2 bg-blue-600 hover:bg-blue-500 rounded-lg text-white font-bold text-sm">
+              <Link href="/admissions/apply" className="header-link">
                 Admissions
               </Link>
-              <Link href="/pay-fees" className="px-3 py-2 bg-blue-600 hover:bg-blue-500 rounded-lg text-white font-bold text-sm">
+              <Link href="/pay-fees" className="header-link">
                 Pay Fees
               </Link>
-              <Link href="/admin" className="px-3 py-2 bg-blue-600 hover:bg-blue-500 rounded-lg text-white font-bold text-sm">
+              <Link href="/admin" className="header-link">
                 Admin
               </Link>
             </div>
