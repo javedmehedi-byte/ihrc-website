@@ -1,7 +1,7 @@
 // lib/auth.ts
 import { SignJWT, jwtVerify } from "jose";
 import { cookies } from "next/headers";
-const TOKEN = "admin_token";
+export const TOKEN = "admin_token";
 
 function getSecret() {
   const secret = process.env.ADMIN_SESSION_SECRET;
@@ -14,11 +14,13 @@ export async function setAdminSession() {
     .setProtectedHeader({ alg: "HS256" })
     .setExpirationTime("7d")
     .sign(getSecret());
-  cookies().set(TOKEN, token, { httpOnly: true, path: "/" });
+  // Return token; set it on a NextResponse in the route handler
+  return token;
 }
 
 export async function isAdmin() {
-  const token = cookies().get(TOKEN)?.value;
+  const c = await cookies();
+  const token = c.get(TOKEN)?.value;
   if (!token) return false;
   try { await jwtVerify(token, getSecret()); return true; } catch { return false; }
 }

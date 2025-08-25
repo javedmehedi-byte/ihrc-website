@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { setAdminSession } from "@/lib/auth";
+import { setAdminSession, TOKEN } from "@/lib/auth";
 
 export async function POST(req: Request) {
   try {
@@ -9,8 +9,10 @@ export async function POST(req: Request) {
       return NextResponse.json({ ok: false, error: "Invalid password" }, { status: 401 });
     }
 
-    await setAdminSession();
-    return NextResponse.json({ ok: true });
+  const token = await setAdminSession();
+  const res = NextResponse.json({ ok: true });
+  res.cookies.set(TOKEN, token, { httpOnly: true, path: "/" });
+  return res;
   } catch (error) {
     console.error("Error in login route:", error);
     return NextResponse.json({ ok: false, error: "Internal server error" }, { status: 500 });
