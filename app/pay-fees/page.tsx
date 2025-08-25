@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 export default function PayFeesPage() {
   const [formData, setFormData] = useState({
@@ -50,8 +50,8 @@ export default function PayFeesPage() {
         return;
       }
 
-      // @ts-ignore Razorpay is injected globally by the script
-      const r = new window.Razorpay({
+  const RazorpayCtor = (window as any).Razorpay;
+  const r = new RazorpayCtor({
         key: data.keyId,
         amount: data.amount,
         currency: data.currency,

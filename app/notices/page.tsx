@@ -17,7 +17,7 @@ export default async function NoticesPage() {
       const data = await res.json();
       notices = (data.items as Notice[]) || [];
     }
-  } catch (_) {
+  } catch {
     // Swallow and show empty state
   }
   return (

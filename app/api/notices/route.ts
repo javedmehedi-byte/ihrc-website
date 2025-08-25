@@ -1,7 +1,6 @@
 import fs from "fs";
 import path from "path";
 import { NextResponse } from "next/server";
-import type { NextRequest } from "next/server";
 import nodemailer from "nodemailer";
 import { db } from "@/lib/db";
 
@@ -37,7 +36,7 @@ const saveFile = async (file: File, fileName: string) => {
   return filePath; // Return the file path for storage in the database
 };
 
-export async function GET(_request: NextRequest) {
+export async function GET() {
   const items = await db.notice.findMany({
     orderBy: [{ publishedAt: "desc" }],
   });
