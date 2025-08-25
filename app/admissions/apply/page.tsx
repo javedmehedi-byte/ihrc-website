@@ -124,7 +124,7 @@ export default function ApplyPage() {
       </div>
 
       <div>
-        <label className="block text-sm font-medium text-black">Father's Name</label>
+  <label className="block text-sm font-medium text-black">Father&apos;s Name</label>
         <input
           type="text"
           name="fatherName"
@@ -136,7 +136,7 @@ export default function ApplyPage() {
       </div>
 
       <div>
-        <label className="block text-sm font-medium text-black">Mother's Name</label>
+  <label className="block text-sm font-medium text-black">Mother&apos;s Name</label>
         <input
           type="text"
           name="motherName"
