@@ -9,18 +9,16 @@ function formatDateTime(d?: string | null) {
   return dt.slice(0, 10) + " " + dt.slice(11, 16) + " UTC";
 }
 
-interface NoticeDetailPageProps {
-  params: { slug: string };
-}
+// Use Next.js built-in PageProps type for dynamic routes
 
-export async function generateMetadata({ params }: NoticeDetailPageProps) {
+export async function generateMetadata({ params }: { params: { slug: string } }) {
   // Optionally fetch notice for dynamic title/description
   return {
     title: `Notice: ${params.slug}`,
   };
 }
 
-export default async function NoticeDetail({ params }: NoticeDetailPageProps) {
+export default async function NoticeDetail({ params }: { params: { slug: string } }) {
   const url = await absoluteUrl(`/api/notices/${params.slug}`);
   const res = await fetch(url, { cache: "no-store" });
   if (!res.ok) return <div className="text-red-600">Notice not found.</div>;
