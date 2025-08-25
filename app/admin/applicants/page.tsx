@@ -8,7 +8,8 @@ function formatDateTime(d: string) {
 }
 
 export default async function ApplicantsPage() {
-  const res = await fetch(absoluteUrl("/api/applicants"), { cache: "no-store" });
+  const url = await absoluteUrl("/api/applicants");
+  const res = await fetch(url, { cache: "no-store" });
   const data = await res.json();
   const items: Applicant[] = data.items || [];
   return (
