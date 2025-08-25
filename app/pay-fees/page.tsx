@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function PayFeesPage() {
   const [formData, setFormData] = useState({
@@ -16,8 +16,22 @@ export default function PayFeesPage() {
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
+  const loadScript = (src: string) => new Promise<boolean>((resolve) => {
+    const s = document.createElement("script");
+    s.src = src;
+    s.onload = () => resolve(true);
+    s.onerror = () => resolve(false);
+    document.body.appendChild(s);
+  });
+
   const handlePayment = async () => {
     try {
+      const amountNumber = Number(formData.feeAmount);
+      if (!formData.courseName || !formData.candidateName || !formData.enrollmentNumber || !formData.semester || !amountNumber) {
+        alert("Please fill all fields with valid values.");
+        return;
+      }
+
       const res = await fetch("/api/pay-fees", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -25,11 +39,38 @@ export default function PayFeesPage() {
       });
 
       const data = await res.json();
-      if (data.success) {
-        window.location.href = data.paymentUrl; // Redirect to Razorpay payment page
-      } else {
-        alert("Failed to initiate payment.");
+      if (!res.ok || !data.success) {
+        alert(data.error || "Failed to initiate payment.");
+        return;
       }
+
+      const ok = await loadScript("https://checkout.razorpay.com/v1/checkout.js");
+      if (!ok) {
+        alert("Failed to load payment SDK. Please try again.");
+        return;
+      }
+
+      // @ts-ignore Razorpay is injected globally by the script
+      const r = new window.Razorpay({
+        key: data.keyId,
+        amount: data.amount,
+        currency: data.currency,
+        order_id: data.orderId,
+        name: "IHRC Paramedical College",
+        description: `Fee Payment - ${formData.courseName} - ${formData.semester}`,
+        prefill: { name: formData.candidateName },
+        notes: {
+          courseName: formData.courseName,
+          candidateName: formData.candidateName,
+          enrollmentNumber: formData.enrollmentNumber,
+          semester: formData.semester,
+        },
+        handler: function () {
+          window.location.href = "/pay-fees/confirmation";
+        },
+        modal: { ondismiss: () => {} },
+      });
+      r.open();
     } catch (error) {
       console.error("Error initiating payment:", error);
       alert("An error occurred while processing your payment.");
