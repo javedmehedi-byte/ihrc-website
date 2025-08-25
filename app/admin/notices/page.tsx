@@ -1,6 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 
+
 type Notice = {
   id?: string;
   title: string;
@@ -153,21 +154,21 @@ export default function AdminNotices() {
             </tr>
           </thead>
         <tbody>
-          {items.map((n: Record<string, any>) => (
-            <tr key={n.id} className="border-t">
+          {items.map((n: Notice) => (
+            <tr key={n.id!} className="border-t">
               <td className="py-2">{n.title}</td>
               <td className="py-2">{n.category}</td>
               <td className="py-2">{n.isPublished ? "Yes" : "No"}</td>
               <td className="py-2 space-x-2">
                 <button
                   className="inline-flex items-center rounded-lg border px-3 py-1 font-medium"
-                  onClick={() => togglePublish(n.id, !n.isPublished)}
+                  onClick={() => togglePublish(n.id!, !n.isPublished)}
                 >
                   {n.isPublished ? "Unpublish" : "Publish"}
                 </button>
                 <button
                   className="inline-flex items-center rounded-lg border px-3 py-1 font-medium"
-                  onClick={() => remove(n.id)}
+                  onClick={() => remove(n.id!)}
                 >
                   Delete
                 </button>
