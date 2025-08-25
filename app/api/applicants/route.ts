@@ -4,6 +4,10 @@ import { NextResponse } from "next/server";
 import nodemailer from "nodemailer";
 import { db } from "@/lib/db";
 
+// Ensure Node.js runtime for Prisma/nodemailer
+export const runtime = "nodejs";
+export const dynamic = "force-dynamic";
+
 // Use a safe temp directory in production (e.g., Vercel serverless)
 const baseUploadDir = process.env.NODE_ENV === "production" ? "/tmp" : process.cwd();
 const uploadDir = path.join(baseUploadDir, "uploads");
