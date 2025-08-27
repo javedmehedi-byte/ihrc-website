@@ -103,7 +103,7 @@ export const site = {
     },
   ] as Course[],
 
-  hero:   { image: "/images/hero.jpg" },
+  hero:   { image: "/images/hero.jpg", images: ["/images/hero.jpg", "/images/hero1.jpg", "/images/hero2.jpg"] },
   campus: { image: "/images/campus.jpg" },
 
   about:

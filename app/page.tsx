@@ -1,31 +1,13 @@
 import Image from "next/image";
 import Link from "next/link";
 import { site } from "@/config/site";
+import HeroSlider from "@/components/HeroSlider";
 
 export default function HomePage() {
   return (
     <main className="space-y-12">
       {/* HERO */}
-      <section className="relative overflow-hidden rounded-2xl">
-        <Image
-          src={site.hero.image}
-          alt={`${site.name} campus`}
-          width={1600}
-          height={700}
-          className="h-[360px] w-full object-cover"
-          priority
-        />
-        {/* A semi‑transparent dark overlay to improve text contrast */}
-        <div className="absolute inset-0 bg-black/50" />
-        <div className="absolute inset-0 flex items-center">
-          <div className="px-6 md:px-10">
-            <h1 className="text-4xl md:text-5xl font-bold text-white drop-shadow">
-              {site.name}
-            </h1>
-            <p className="mt-3 text-white/90 text-lg">{site.tagline}</p>
-          </div>
-        </div>
-      </section>
+  <HeroSlider images={site.hero.images ?? [site.hero.image]} title={site.name} subtitle={site.tagline} />
 
       {/* COURSES */}
       <section className="space-y-4">
