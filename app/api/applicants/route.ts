@@ -54,6 +54,8 @@ export async function POST(req: Request) {
   const courseCode = formData.get("courseCode");
   const fatherName = formData.get("fatherName");
   const motherName = formData.get("motherName");
+  const dob = formData.get("dob");
+  const gender = formData.get("gender");
   const address = formData.get("address");
   const qualification = formData.get("qualification");
   const classXMarksheet = formData.get("classXMarksheet") as File;
@@ -66,7 +68,7 @@ export async function POST(req: Request) {
     !email ||
     !phone ||
     !courseCode ||
-    !fatherName ||
+  !fatherName ||
     !motherName ||
     !address ||
     !qualification ||
@@ -98,6 +100,8 @@ export async function POST(req: Request) {
     email: email as string,
     phone: phone as string,
     courseCode: courseCode as string,
+    dob: dob ? new Date(String(dob)) : null,
+    gender: gender ? String(gender) : null,
     fatherName: fatherName as string,
     motherName: motherName as string,
     address: address as string,
@@ -107,8 +111,9 @@ export async function POST(req: Request) {
     passportPhoto: passportPhotoPath,
   };
 
+  let created;
   try {
-  await db.applicant.create({ data: applicantData });
+  created = await db.applicant.create({ data: applicantData });
   } catch (error) {
     console.error("Failed to save applicant data:", error);
     return NextResponse.json({ error: "Failed to save applicant data" }, { status: 500 });
@@ -140,9 +145,10 @@ export async function POST(req: Request) {
       text: `Dear ${fullName}, your application has been submitted successfully.`,
     });
 
-    return NextResponse.json({ message: "Application submitted successfully!" });
+  return NextResponse.json({ message: "Application submitted successfully!", id: created.id });
   } catch (error) {
     console.error("Failed to send email:", error);
-    return NextResponse.json({ error: "Failed to send email." }, { status: 500 });
+  // Even if email fails, return success with id so user can proceed
+  return NextResponse.json({ message: "Application submitted successfully!", id: created.id, emailError: true });
   }
 }

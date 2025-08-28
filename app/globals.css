@@ -82,6 +82,13 @@ i:hover {
   color: #0b68e6; /* Example hover color */
 }
 
+/* Print styles */
+@media print {
+  .no-print { display: none !important; }
+  .card-3d { box-shadow: none !important; border-color: #000 !important; }
+  body { background: #fff !important; color: #000 !important; }
+}
+
 /* Card Section Styles */
 .card-title {
   color: var(--card-title-color) !important;

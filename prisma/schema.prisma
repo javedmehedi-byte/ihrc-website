@@ -51,6 +51,7 @@ model Applicant {
   phone           String
   courseCode      String
   dob             DateTime?
+  gender          String?
   address         String
   fatherName      String
   motherName      String

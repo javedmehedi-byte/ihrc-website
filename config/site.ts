@@ -111,6 +111,6 @@ export const site = {
       "IHRC Paramedical College is run by Imphal Hospital & Research Centre Pvt. Ltd.",
       "We provide industry-aligned paramedical education with a strong focus on clinical exposure and patient-centric skills.",
       "Our labs and teaching facilities are designed to mirror real hospital workflows, preparing students for immediate employability.",
-      "Experienced faculty, structured internships, and strong hospital partnerships support successful careers in healthcare."
+      "Experienced faculties, structured internships, and strong hospital partnerships support successful careers in healthcare."
     ].join("\n"),
 };
