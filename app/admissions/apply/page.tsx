@@ -30,10 +30,10 @@ export default function ApplyPage() {
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, files } = e.target;
-    if (files && files[0].size <= 2 * 1024 * 1024) { // Check file size (2MB)
+    if (files && files[0].size <= 5 * 1024 * 1024) { // Check file size (5MB)
       setForm((prev) => ({ ...prev, [name]: files[0] }));
     } else {
-      alert("File size must be less than 2MB.");
+      alert("File size must be less than 5MB.");
     }
   };
 
@@ -73,7 +73,13 @@ export default function ApplyPage() {
       setMessage("Application submitted successfully!");
       if (id) window.location.href = `/admissions/confirmation/${id}`;
     } else {
-      setMessage("Failed to submit the application.");
+      try {
+        const err = await res.json();
+        const msg = [err?.error, err?.detail].filter(Boolean).join(" - ");
+        setMessage(msg || "Failed to submit the application.");
+      } catch {
+        setMessage("Failed to submit the application.");
+      }
     }
   };
 
@@ -82,7 +88,7 @@ export default function ApplyPage() {
       {/* Instructions */}
       <div className="rounded-2xl border bg-gradient-to-br from-blue-50 to-indigo-50 p-5 shadow-lg">
         <h2 className="text-xl font-semibold text-blue-800">Admission Application</h2>
-        <p className="text-gray-900 mt-1">Fill all required fields and upload clear documents. Max file size 2MB. Accepted: PDF (marksheets), JPG/PNG (photo).</p>
+  <p className="text-gray-900 mt-1">Fill all required fields and upload clear documents. Max file size 5MB. Accepted: PDF (marksheets), JPG/PNG (photo).</p>
         <ol className="mt-3 list-decimal pl-6 text-gray-900">
           <li>Submit the form online.</li>
           <li>On success, print the confirmation page.</li>
@@ -166,15 +172,15 @@ export default function ApplyPage() {
 
       {/* Section F: Documents */}
       <div className="card-3d p-4">
-        <label className="block text-sm font-medium text-black">Class X Marksheet (PDF, max 2MB)</label>
+  <label className="block text-sm font-medium text-black">Class X Marksheet (PDF, max 5MB)</label>
   <input type="file" name="classXMarksheet" accept="application/pdf" className="w-full rounded-lg border px-3 py-2 text-black" onChange={handleFileChange} required />
       </div>
       <div className="card-3d p-4">
-        <label className="block text-sm font-medium text-black">Class XII Marksheet (PDF, max 2MB)</label>
+  <label className="block text-sm font-medium text-black">Class XII Marksheet (PDF, max 5MB)</label>
   <input type="file" name="classXiiMarksheet" accept="application/pdf" className="w-full rounded-lg border px-3 py-2 text-black" onChange={handleFileChange} required />
       </div>
       <div className="card-3d p-4">
-        <label className="block text-sm font-medium text-black">Passport Size Photo (JPEG/PNG, max 2MB)</label>
+  <label className="block text-sm font-medium text-black">Passport Size Photo (JPEG/PNG, max 5MB)</label>
   <input type="file" name="passportPhoto" accept="image/jpeg,image/png" className="w-full rounded-lg border px-3 py-2 text-black" onChange={handleFileChange} required />
       </div>
 
