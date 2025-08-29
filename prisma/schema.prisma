@@ -46,6 +46,8 @@ model Applicant {
   id              String    @id @default(cuid())
   createdAt       DateTime  @default(now())
   updatedAt       DateTime  @updatedAt
+  applicationNo   Int?      @unique @default(autoincrement())
+  applicationCode String?   @unique
   fullName        String
   email           String
   phone           String
@@ -60,6 +62,13 @@ model Applicant {
   classXiiMarksheet String  // File name or path for Class XII mark sheet
   passportPhoto   String    // File name or path for passport photo
   status          String    @default("submitted")
+}
+
+model CourseSequence {
+  courseCode String  @id
+  last       Int     @default(0)
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
 }
 
 model Payment {
