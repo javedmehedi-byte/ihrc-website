@@ -40,7 +40,16 @@ const saveFile = async (file: File, fileName: string) => {
 };
 
 export async function GET() {
-  const items = await db.applicant.findMany({ orderBy: { createdAt: "desc" } });
+  // Use raw SQL to include the dynamic applicationCode column (added outside Prisma schema)
+  const items = await db.$queryRawUnsafe<Array<{
+    id: string;
+    fullName: string;
+    email: string;
+    phone: string;
+    courseCode: string;
+    createdAt: Date;
+    applicationCode: string | null;
+  }>>('SELECT "id", "fullName", "email", "phone", "courseCode", "createdAt", COALESCE("applicationCode", \'\') AS "applicationCode" FROM "public"."Applicant" ORDER BY "createdAt" DESC');
   return NextResponse.json({ items });
 }
 
@@ -149,18 +158,19 @@ export async function POST(req: Request) {
   const adminEmail = process.env.ADMIN_EMAIL;
 
   try {
+    const code = created.applicationCode ?? created.id;
     await transporter.sendMail({
       from: process.env.EMAIL_USER,
       to: adminEmail,
-      subject: "New Admission Application",
-      text: `A new application has been submitted by ${fullName}.`,
+      subject: `New Admission Application - ${code}`,
+      text: `A new application has been submitted by ${fullName} (Course: ${courseCode}).\nApplication Code: ${code}\nEmail: ${email}\nPhone: ${phone}`,
     });
 
     await transporter.sendMail({
       from: process.env.EMAIL_USER,
       to: email as string,
-      subject: "Application Submitted Successfully",
-      text: `Dear ${fullName}, your application has been submitted successfully.`,
+      subject: `Application Submitted Successfully - ${code}`,
+      text: `Dear ${fullName},\n\nYour application has been submitted successfully.\nApplication Code: ${code}\nCourse: ${courseCode}\n\nPlease keep this code for future reference.`,
     });
 
     return NextResponse.json({ message: "Application submitted successfully!", id: created.id, applicationCode: created.applicationCode });
