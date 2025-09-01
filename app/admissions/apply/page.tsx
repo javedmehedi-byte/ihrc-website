@@ -86,7 +86,6 @@ export default function ApplyPage() {
         <ol className="mt-3 list-decimal pl-6 text-gray-900">
           <li>Submit the form online.</li>
           <li>On success, print the confirmation page.</li>
-          <li>Submit two recent passport-size photographs along with the printed form.</li>
           <li>Submit the printed form at the college office with originals for verification.</li>
         </ol>
       </div>
@@ -101,15 +100,15 @@ export default function ApplyPage() {
       <div className="grid md:grid-cols-2 gap-4">
         <div className="card-3d p-4">
           <label className="block text-sm font-medium text-black">Full Name</label>
-          <input type="text" name="fullName" className="w-full rounded-lg border px-3 py-2 text-black" value={form.fullName} onChange={handleChange} required />
+          <input type="text" name="fullName" className="w-full rounded-lg border px-3 py-2" value={form.fullName} onChange={handleChange} required />
         </div>
         <div className="card-3d p-4">
           <label className="block text-sm font-medium text-black">Date of Birth</label>
-          <input type="date" name="dob" className="w-full rounded-lg border px-3 py-2 text-black" value={form.dob} onChange={handleChange} required />
+          <input type="date" name="dob" className="w-full rounded-lg border px-3 py-2" value={form.dob} onChange={handleChange} required />
         </div>
         <div className="card-3d p-4">
           <label className="block text-sm font-medium text-black">Gender</label>
-          <select name="gender" className="w-full rounded-lg border px-3 py-2 text-black" value={form.gender} onChange={handleChange} required>
+          <select name="gender" className="w-full rounded-lg border px-3 py-2" value={form.gender} onChange={handleChange} required>
             <option value="">Select</option>
             <option>Male</option>
             <option>Female</option>
@@ -118,7 +117,7 @@ export default function ApplyPage() {
         </div>
         <div className="card-3d p-4">
           <label className="block text-sm font-medium text-black">Course</label>
-          <select name="courseCode" className="w-full rounded-lg border px-3 py-2 text-black" value={form.courseCode} onChange={handleChange} required>
+          <select name="courseCode" className="w-full rounded-lg border px-3 py-2" value={form.courseCode} onChange={handleChange} required>
             {site.courses.map((course) => (
               <option key={course.code} value={course.code}>
                 {course.code} - {course.name}
@@ -132,11 +131,11 @@ export default function ApplyPage() {
       <div className="grid md:grid-cols-2 gap-4">
         <div className="card-3d p-4">
           <label className="block text-sm font-medium text-black">Email</label>
-          <input type="email" name="email" className="w-full rounded-lg border px-3 py-2 text-black" value={form.email} onChange={handleChange} required />
+          <input type="email" name="email" className="w-full rounded-lg border px-3 py-2" value={form.email} onChange={handleChange} required />
         </div>
         <div className="card-3d p-4">
           <label className="block text-sm font-medium text-black">Phone</label>
-          <input type="tel" name="phone" className="w-full rounded-lg border px-3 py-2 text-black" value={form.phone} onChange={handleChange} required />
+          <input type="tel" name="phone" className="w-full rounded-lg border px-3 py-2" value={form.phone} onChange={handleChange} required />
         </div>
       </div>
 
@@ -144,38 +143,38 @@ export default function ApplyPage() {
       <div className="grid md:grid-cols-2 gap-4">
         <div className="card-3d p-4">
           <label className="block text-sm font-medium text-black">Father&apos;s Name</label>
-          <input type="text" name="fatherName" className="w-full rounded-lg border px-3 py-2 text-black" value={form.fatherName} onChange={handleChange} required />
+          <input type="text" name="fatherName" className="w-full rounded-lg border px-3 py-2" value={form.fatherName} onChange={handleChange} required />
         </div>
         <div className="card-3d p-4">
           <label className="block text-sm font-medium text-black">Mother&apos;s Name</label>
-          <input type="text" name="motherName" className="w-full rounded-lg border px-3 py-2 text-black" value={form.motherName} onChange={handleChange} required />
+          <input type="text" name="motherName" className="w-full rounded-lg border px-3 py-2" value={form.motherName} onChange={handleChange} required />
         </div>
       </div>
 
       {/* Section D: Address */}
       <div className="card-3d p-4">
         <label className="block text-sm font-medium text-black">Address</label>
-  <textarea name="address" className="w-full rounded-lg border px-3 py-2 text-black" value={form.address} onChange={handleChange} required />
+        <textarea name="address" className="w-full rounded-lg border px-3 py-2" value={form.address} onChange={handleChange} required />
       </div>
 
       {/* Section E: Education */}
       <div className="card-3d p-4">
         <label className="block text-sm font-medium text-black">Highest Qualification</label>
-  <input type="text" name="qualification" className="w-full rounded-lg border px-3 py-2 text-black" value={form.qualification} onChange={handleChange} required />
+        <input type="text" name="qualification" className="w-full rounded-lg border px-3 py-2" value={form.qualification} onChange={handleChange} required />
       </div>
 
       {/* Section F: Documents */}
       <div className="card-3d p-4">
         <label className="block text-sm font-medium text-black">Class X Marksheet (PDF, max 2MB)</label>
-  <input type="file" name="classXMarksheet" accept="application/pdf" className="w-full rounded-lg border px-3 py-2 text-black" onChange={handleFileChange} required />
+        <input type="file" name="classXMarksheet" accept="application/pdf" className="w-full rounded-lg border px-3 py-2" onChange={handleFileChange} required />
       </div>
       <div className="card-3d p-4">
         <label className="block text-sm font-medium text-black">Class XII Marksheet (PDF, max 2MB)</label>
-  <input type="file" name="classXiiMarksheet" accept="application/pdf" className="w-full rounded-lg border px-3 py-2 text-black" onChange={handleFileChange} required />
+        <input type="file" name="classXiiMarksheet" accept="application/pdf" className="w-full rounded-lg border px-3 py-2" onChange={handleFileChange} required />
       </div>
       <div className="card-3d p-4">
         <label className="block text-sm font-medium text-black">Passport Size Photo (JPEG/PNG, max 2MB)</label>
-  <input type="file" name="passportPhoto" accept="image/jpeg,image/png" className="w-full rounded-lg border px-3 py-2 text-black" onChange={handleFileChange} required />
+        <input type="file" name="passportPhoto" accept="image/jpeg,image/png" className="w-full rounded-lg border px-3 py-2" onChange={handleFileChange} required />
       </div>
 
       {/* Declaration */}

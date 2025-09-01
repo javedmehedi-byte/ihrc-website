@@ -9,8 +9,7 @@
   "lint": "next lint",
   "format": "prettier --write .",
     "prisma": "prisma generate && prisma migrate deploy",
-  "prepare": "prisma generate",
-  "backfill:appno": "tsx scripts/backfill-application-no.ts"
+    "prepare": "prisma generate"
   },
   "dependencies": {
     "@prisma/client": "^6.14.0",

@@ -94,7 +94,7 @@ export async function POST(req: Request) {
   const classXiiMarksheetPath = await saveFile(classXiiMarksheet, `classXii_${Date.now()}_${classXiiMarksheet.name}`);
   const passportPhotoPath = await saveFile(passportPhoto, `passport_${Date.now()}_${passportPhoto.name}`);
 
-  // Prepare applicant data (without applicationCode yet)
+  // Save applicant data to the database
   const applicantData = {
     fullName: fullName as string,
     email: email as string,
@@ -113,27 +113,7 @@ export async function POST(req: Request) {
 
   let created;
   try {
-    const cc = String(courseCode);
-    const year = new Date().getFullYear();
-    created = await db.$transaction(async (tx) => {
-      // Ensure helper table exists
-      await tx.$executeRawUnsafe('CREATE TABLE IF NOT EXISTS "public"."CourseSequence" ("courseCode" TEXT PRIMARY KEY, "last" INTEGER NOT NULL DEFAULT 0, "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP, "updatedAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP)');
-      // Atomically increment and return the new sequence value for this course
-      const rows = await tx.$queryRawUnsafe<{ last: number }[]>(
-        'INSERT INTO "public"."CourseSequence" ("courseCode", "last") VALUES ($1, 1) ON CONFLICT ("courseCode") DO UPDATE SET "last" = "CourseSequence"."last" + 1 RETURNING "last";',
-        cc,
-      );
-      const next = rows?.[0]?.last ?? 1;
-      const code = `${cc}-${year}-${String(next).padStart(4, "0")}`;
-      const item = await tx.applicant.create({ data: applicantData });
-      await tx.$executeRawUnsafe(
-        'UPDATE "public"."Applicant" SET "applicationCode" = $1 WHERE "id" = $2',
-        code,
-        item.id,
-      );
-      // Return a shape that includes applicationCode for the response
-      return { ...item, applicationCode: code } as typeof item & { applicationCode: string };
-    });
+  created = await db.applicant.create({ data: applicantData });
   } catch (error) {
     console.error("Failed to save applicant data:", error);
     return NextResponse.json({ error: "Failed to save applicant data" }, { status: 500 });
@@ -165,7 +145,7 @@ export async function POST(req: Request) {
       text: `Dear ${fullName}, your application has been submitted successfully.`,
     });
 
-  return NextResponse.json({ message: "Application submitted successfully!", id: created.id, applicationCode: (created as { applicationCode?: string | null }).applicationCode });
+  return NextResponse.json({ message: "Application submitted successfully!", id: created.id });
   } catch (error) {
     console.error("Failed to send email:", error);
   // Even if email fails, return success with id so user can proceed

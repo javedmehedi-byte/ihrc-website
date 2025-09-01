@@ -35,26 +35,6 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* FACILITIES */}
-      <section className="space-y-4">
-        <h2 className="text-2xl font-semibold">Our Facilities</h2>
-        <div className="grid md:grid-cols-3 gap-6">
-          {[
-            { title: "Modern Laboratories", desc: "Well‑equipped labs for hands‑on learning and skill practice." },
-            { title: "Clinical Training", desc: "Hospital‑based internships and real‑world patient exposure." },
-            { title: "Library & E‑Resources", desc: "Access to textbooks, journals, and digital learning content." },
-            { title: "Experienced Faculty", desc: "Qualified instructors with strong clinical experience." },
-            { title: "Placement Support", desc: "Career guidance, interviews, and placement assistance." },
-            { title: "Student Support", desc: "Mentorship, counseling, and anti‑ragging committee." },
-          ].map((f) => (
-            <div key={f.title} className="card-3d p-5 h-full">
-              <div className="text-lg font-semibold text-green-700">{f.title}</div>
-              <p className="mt-2 text-gray-700">{f.desc}</p>
-            </div>
-          ))}
-        </div>
-      </section>
-
       {/* ABOUT / CAMPUS */}
       <section className="rounded-2xl border bg-white shadow p-6 flex flex-col md:flex-row items-center gap-6">
         <Image
