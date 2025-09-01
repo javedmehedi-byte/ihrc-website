@@ -80,6 +80,10 @@ export default async function CoursePage({ params }: { params: Params }) {
         <dd>{course.facts.duration}</dd>
               </div>
               <div className="py-2 flex items-start justify-between gap-4 border-b last:border-0">
+                <dt className="font-medium">Internship</dt>
+                <dd>{course.name.toLowerCase().startsWith("diploma") ? "6 months" : "12 months"}</dd>
+              </div>
+              <div className="py-2 flex items-start justify-between gap-4 border-b last:border-0">
                 <dt className="font-medium">Eligibility</dt>
         <dd>{course.facts.eligibility}</dd>
               </div>

@@ -39,7 +39,7 @@ export const site = {
       overview:
         "The B.Sc. in Dialysis Technology trains students to operate dialysis machines, manage patient care during hemodialysis, and assist nephrologists with safe clinical procedures.",
       facts: {
-        duration: "3 years + 6 months internship",
+        duration: "3 years + 12 months internship",
         eligibility: "10+2 Science (PCB) or equivalent",
         mode: "Full‑time",
       },
@@ -62,7 +62,7 @@ export const site = {
       overview:
         "The B.Sc. in MLT focuses on diagnostic sciences with hands‑on training across hematology, microbiology, biochemistry, and pathology for accurate disease detection.",
       facts: {
-        duration: "3 years + 6 months internship",
+        duration: "3 years + 12 months internship",
         eligibility: "10+2 Science (PCB) or equivalent",
         mode: "Full‑time",
       },
@@ -85,7 +85,7 @@ export const site = {
       overview:
         "The B.Sc. in OTT prepares students for sterile OT practices, surgical assistance, instrumentation, and peri‑operative patient care alongside surgeons and anesthetists.",
       facts: {
-        duration: "3 years + 6 months internship",
+        duration: "3 years + 12 months internship",
         eligibility: "10+2 Science (PCB) or equivalent",
         mode: "Full‑time",
       },
@@ -99,6 +99,76 @@ export const site = {
         "OT Technologist",
         "Surgical Assistant",
         "CSSD Technician",
+      ],
+    },
+    // Diploma Programmes
+    {
+      code: "DMLT",
+      name: "Diploma in Medical Laboratory Technology",
+      image: "/images/course-mlt.jpg",
+      overview:
+        "The Diploma in MLT equips students with core lab skills across hematology, biochemistry, and microbiology to support accurate and timely diagnostics.",
+      facts: {
+        duration: "2 years + 6 months internship",
+        eligibility: "10+2 Science (PCB) or equivalent",
+        mode: "Full‑time",
+      },
+      curriculum: [
+        "Basics of Laboratory Techniques",
+        "Clinical Biochemistry",
+        "Hematology & Blood Banking",
+        "Medical Microbiology",
+      ],
+      careers: [
+        "Lab Technician",
+        "Phlebotomist",
+        "Sample Processing Assistant",
+      ],
+    },
+    {
+      code: "DDT",
+      name: "Diploma in Dialysis Technology",
+      image: "/images/course-dt.jpg",
+      overview:
+        "A practice‑oriented program covering dialysis procedures, machine handling, and patient care to assist nephrology teams.",
+      facts: {
+        duration: "2 years + 6 months internship",
+        eligibility: "10+2 Science (PCB) or equivalent",
+        mode: "Full‑time",
+      },
+      curriculum: [
+        "Fundamentals of Nephrology",
+        "Dialysis Equipment & Maintenance",
+        "Patient Monitoring & Safety",
+        "Dialyzer Reprocessing",
+      ],
+      careers: [
+        "Dialysis Technician",
+        "Dialysis Assistant",
+        "Unit Coordinator (Dialysis)",
+      ],
+    },
+    {
+      code: "DOTT",
+      name: "Diploma in Operation Theatre Technology",
+      image: "/images/course-ott.jpg",
+      overview:
+        "Focuses on OT protocols, sterilization, and instrumentation to support surgical teams throughout peri‑operative care.",
+      facts: {
+        duration: "2 years + 6 months internship",
+        eligibility: "10+2 Science (PCB) or equivalent",
+        mode: "Full‑time",
+      },
+      curriculum: [
+        "OT Procedures & Asepsis",
+        "Sterilization & Infection Control",
+        "Surgical Instruments",
+        "Anesthesia Basics",
+      ],
+      careers: [
+        "OT Technician",
+        "CSSD Assistant",
+        "Surgical Support Staff",
       ],
     },
   ] as Course[],

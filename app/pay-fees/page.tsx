@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { site } from "@/config/site";
 
 // Minimal types for Razorpay Checkout to avoid using `any`
 type RazorpayOptions = {
@@ -107,9 +108,11 @@ export default function PayFeesPage() {
             required
           >
             <option value="">Select Course</option>
-            <option value="MLT">Medical Lab Technology</option>
-            <option value="OTT">Operation Theatre Technology</option>
-            <option value="DT">Dialysis Technology</option>
+            {site.courses.map((c) => (
+              <option key={c.code} value={c.code}>
+                {c.code} - {c.name}
+              </option>
+            ))}
           </select>
         </div>
         <div>
