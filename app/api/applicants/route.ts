@@ -62,31 +62,31 @@ export async function POST(req: Request) {
   const classXiiMarksheet = formData.get("classXiiMarksheet") as File;
   const passportPhoto = formData.get("passportPhoto") as File;
 
-  // Validate required fields with a clearer message
-  const missing: string[] = [];
-  if (!fullName) missing.push("fullName");
-  if (!email) missing.push("email");
-  if (!phone) missing.push("phone");
-  if (!courseCode) missing.push("courseCode");
-  if (!fatherName) missing.push("fatherName");
-  if (!motherName) missing.push("motherName");
-  if (!address) missing.push("address");
-  if (!qualification) missing.push("qualification");
-  if (!classXMarksheet) missing.push("classXMarksheet");
-  if (!classXiiMarksheet) missing.push("classXiiMarksheet");
-  if (!passportPhoto) missing.push("passportPhoto");
-  if (missing.length) {
-    return NextResponse.json({ error: `Missing fields: ${missing.join(", ")}` }, { status: 400 });
+  // Validate required fields
+  if (
+    !fullName ||
+    !email ||
+    !phone ||
+    !courseCode ||
+  !fatherName ||
+    !motherName ||
+    !address ||
+    !qualification ||
+    !classXMarksheet ||
+    !classXiiMarksheet ||
+    !passportPhoto
+  ) {
+    return NextResponse.json({ error: "Missing fields" }, { status: 400 });
   }
 
-  // Validate file sizes (5MB max)
-  const maxFileSize = 5 * 1024 * 1024; // 5MB
+  // Validate file sizes (2MB max)
+  const maxFileSize = 2 * 1024 * 1024; // 2MB
   if (
     classXMarksheet.size > maxFileSize ||
     classXiiMarksheet.size > maxFileSize ||
     passportPhoto.size > maxFileSize
   ) {
-    return NextResponse.json({ error: "File size must be less than 5MB" }, { status: 400 });
+    return NextResponse.json({ error: "File size must be less than 2MB" }, { status: 400 });
   }
 
   // Save files locally
