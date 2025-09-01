@@ -111,9 +111,27 @@ export async function POST(req: Request) {
     passportPhoto: passportPhotoPath,
   };
 
-  let created;
+    let created: { id: string; applicationCode?: string };
   try {
-  created = await db.applicant.create({ data: applicantData });
+      const cc = String(courseCode);
+      const year = new Date().getFullYear();
+      created = await db.$transaction(async (tx) => {
+        // Ensure schema bits exist without requiring a migration
+        await tx.$executeRawUnsafe('ALTER TABLE "public"."Applicant" ADD COLUMN IF NOT EXISTS "applicationCode" TEXT UNIQUE');
+        await tx.$executeRawUnsafe('CREATE TABLE IF NOT EXISTS "public"."CourseSequence" ("courseCode" TEXT PRIMARY KEY, "last" INTEGER NOT NULL DEFAULT 0, "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP, "updatedAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP)');
+
+        // Atomically get next sequence for this course
+        const rows = await tx.$queryRawUnsafe<{ last: number }[]>(
+          'INSERT INTO "public"."CourseSequence" ("courseCode", "last") VALUES ($1, 1) ON CONFLICT ("courseCode") DO UPDATE SET "last" = "CourseSequence"."last" + 1 RETURNING "last";',
+          cc,
+        );
+        const next = rows?.[0]?.last ?? 1;
+        const code = `${cc}-${year}-${String(next).padStart(4, "0")}`;
+
+        const item = await tx.applicant.create({ data: applicantData });
+        await tx.$executeRawUnsafe('UPDATE "public"."Applicant" SET "applicationCode" = $1 WHERE "id" = $2', code, item.id);
+        return { id: item.id, applicationCode: code };
+      });
   } catch (error) {
     console.error("Failed to save applicant data:", error);
     return NextResponse.json({ error: "Failed to save applicant data" }, { status: 500 });
@@ -145,10 +163,10 @@ export async function POST(req: Request) {
       text: `Dear ${fullName}, your application has been submitted successfully.`,
     });
 
-  return NextResponse.json({ message: "Application submitted successfully!", id: created.id });
+    return NextResponse.json({ message: "Application submitted successfully!", id: created.id, applicationCode: created.applicationCode });
   } catch (error) {
     console.error("Failed to send email:", error);
   // Even if email fails, return success with id so user can proceed
-  return NextResponse.json({ message: "Application submitted successfully!", id: created.id, emailError: true });
+  return NextResponse.json({ message: "Application submitted successfully!", id: created.id, applicationCode: created.applicationCode, emailError: true });
   }
 }
