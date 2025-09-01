@@ -45,13 +45,6 @@ export async function GET() {
 }
 
 export async function POST(req: Request) {
-  // Quick sanity check for DB config
-  if (!process.env.DATABASE_URL) {
-    const msg = "Database is not configured (DATABASE_URL missing).";
-    console.error(msg);
-    return NextResponse.json({ error: msg }, { status: 500 });
-  }
-
   const formData = await req.formData();
 
   // Extract fields from formData
@@ -141,14 +134,9 @@ export async function POST(req: Request) {
       // Return a shape that includes applicationCode for the response
       return { ...item, applicationCode: code } as typeof item & { applicationCode: string };
     });
-  } catch (error: unknown) {
+  } catch (error) {
     console.error("Failed to save applicant data:", error);
-    let message = "Failed to save applicant data";
-    if (process.env.NODE_ENV !== "production") {
-      if (error instanceof Error) message = error.message;
-      else if (typeof error === "string") message = error;
-    }
-    return NextResponse.json({ error: message }, { status: 500 });
+    return NextResponse.json({ error: "Failed to save applicant data" }, { status: 500 });
   }
 
   // Send email notifications (same as before)
