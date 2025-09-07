@@ -185,18 +185,18 @@ export const site = {
     ].join("\n"),
   facilities: [
     {
-      title: "Advanced Laboratories",
-      desc: "Well-equipped hematology, microbiology, biochemistry and pathology labs mirroring hospital standards.",
+      title: "Own Advanced Lab",
+      desc: "In‑house hematology, microbiology, biochemistry and pathology labs mirroring hospital standards.",
       icon: "🧪",
     },
     {
-      title: "Dialysis Simulation Unit",
-      desc: "Hands-on practice with dialysis machines for safe hemodialysis procedures.",
+      title: "Own Dialysis Unit",
+      desc: "Hands-on training with in‑house dialysis machines for safe hemodialysis procedures.",
       icon: "💉",
     },
     {
-      title: "Operation Theatre Suite",
-      desc: "Sterile OT setup for instrumentation, asepsis and peri-operative training.",
+      title: "Own Operation Theatre",
+      desc: "Sterile in‑house OT setup for instrumentation, asepsis and peri‑operative training.",
       icon: "🛠",
     },
     {
