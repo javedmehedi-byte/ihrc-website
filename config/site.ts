@@ -200,8 +200,8 @@ export const site = {
       icon: "🛠",
     },
     {
-      title: "Best & Clinically Well Experienced Faculties",
-      desc: "Qualified, clinically experienced and student‑focused teaching staff emphasizing competence and ethics.",
+      title: "Robust Faculties",
+      desc: "Clinically well‑experienced, student‑centric teaching staff delivering outcome‑driven learning with strong ethical grounding.",
       icon: "🎯",
     },
     {
