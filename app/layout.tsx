@@ -27,9 +27,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               <Link href="/notices" className="header-link">
                 Notices
               </Link>
-              <Link href="/results" className="header-link">
-                Results
-              </Link>
               <Link href="/admissions/apply" className="header-link">
                 Admissions
               </Link>
