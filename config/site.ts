@@ -200,8 +200,8 @@ export const site = {
       icon: "🛠",
     },
     {
-      title: "Skill Development Center",
-      desc: "Clinical skill stations for phlebotomy, sample handling and patient monitoring.",
+      title: "Best Faculties",
+      desc: "Qualified, student‑focused teaching staff emphasizing clinical competence and ethics.",
       icon: "🎯",
     },
     {
