@@ -35,6 +35,20 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* FACILITIES */}
+      <section className="space-y-4">
+        <h2 className="text-2xl font-semibold">Our Facilities</h2>
+        <div className="grid md:grid-cols-3 gap-6">
+          {site.facilities?.map((f) => (
+            <div key={f.title} className="rounded-xl border bg-white p-5 shadow hover:shadow-lg transition card-3d">
+              <div className="text-3xl mb-2" aria-hidden>{f.icon}</div>
+              <h3 className="font-semibold text-blue-700 mb-1">{f.title}</h3>
+              <p className="text-sm text-gray-700 leading-relaxed">{f.desc}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
       {/* ABOUT / CAMPUS */}
       <section className="rounded-2xl border bg-white shadow p-6 flex flex-col md:flex-row items-center gap-6">
         <Image

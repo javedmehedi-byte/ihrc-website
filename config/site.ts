@@ -183,4 +183,36 @@ export const site = {
       "Our labs and teaching facilities are designed to mirror real hospital workflows, preparing students for immediate employability.",
       "Experienced faculties, structured internships, and strong hospital partnerships support successful careers in healthcare."
     ].join("\n"),
+  facilities: [
+    {
+      title: "Advanced Laboratories",
+      desc: "Well-equipped hematology, microbiology, biochemistry and pathology labs mirroring hospital standards.",
+      icon: "🧪",
+    },
+    {
+      title: "Dialysis Simulation Unit",
+      desc: "Hands-on practice with dialysis machines for safe hemodialysis procedures.",
+      icon: "💉",
+    },
+    {
+      title: "Operation Theatre Suite",
+      desc: "Sterile OT setup for instrumentation, asepsis and peri-operative training.",
+      icon: "🛠",
+    },
+    {
+      title: "Skill Development Center",
+      desc: "Clinical skill stations for phlebotomy, sample handling and patient monitoring.",
+      icon: "🎯",
+    },
+    {
+      title: "Digital Learning Resources",
+      desc: "Access to e-learning materials, journals and structured case discussions.",
+      icon: "💻",
+    },
+    {
+      title: "Student Support Services",
+      desc: "Guidance, mentoring and career counseling for academic success.",
+      icon: "🤝",
+    },
+  ],
 };
