@@ -200,8 +200,8 @@ export const site = {
       icon: "🛠",
     },
     {
-      title: "Best Faculties",
-      desc: "Qualified, student‑focused teaching staff emphasizing clinical competence and ethics.",
+      title: "Best & Clinically Well Experienced Faculties",
+      desc: "Qualified, clinically experienced and student‑focused teaching staff emphasizing competence and ethics.",
       icon: "🎯",
     },
     {
