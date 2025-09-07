@@ -17,30 +17,6 @@ model Notice {
   createdAt   DateTime @default(now()) // Add this field
 }
 
-model ResultSession {
-  id          String      @id @default(cuid())
-  title       String
-  courseCode  String
-  semester    Int
-  examDate    DateTime?
-  isPublished Boolean     @default(false)
-  rows        ResultRow[]
-  createdAt   DateTime    @default(now())
-  updatedAt   DateTime    @updatedAt
-}
-
-model ResultRow {
-  id          String        @id @default(cuid())
-  sessionId   String
-  session     ResultSession @relation(fields: [sessionId], references: [id])
-  rollNo      String
-  studentName String
-  sgpa        Float?
-  cgpa        Float?
-  grade       String?
-  status      String?
-  createdAt   DateTime      @default(now())
-}
 
 model Applicant {
   id              String    @id @default(cuid())
