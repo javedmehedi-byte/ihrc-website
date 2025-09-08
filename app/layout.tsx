@@ -23,12 +23,15 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                 IHRC PARAMEDICAL COLLEGE
               </Link>
             </div>
-            <div className="flex gap-3 ml-auto">
+            <div className="flex gap-3 ml-auto header-nav">
               <Link href="/notices" className="header-link">
                 Notices
               </Link>
-              <Link href="/admissions/apply" className="header-link">
-                Admissions
+              <Link href="/about" className="header-link">
+                About
+              </Link>
+              <Link href="/faculties" className="header-link">
+                Faculties
               </Link>
               <Link href="/pay-fees" className="header-link">
                 Pay Fees

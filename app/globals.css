@@ -179,6 +179,12 @@ i:hover {
   transition: transform 0.15s ease, box-shadow 0.15s ease, filter 0.15s ease;
 }
 
+/* Justify helper for paragraph and list details */
+.text-justified {
+  text-align: justify;
+  text-justify: inter-word;
+}
+
 .header-link:hover {
   transform: translateY(-2px); /* slight lift */
   filter: brightness(1.05);
@@ -193,6 +199,43 @@ i:hover {
   box-shadow:
     0 6px 10px rgba(11, 104, 230, 0.3),
     inset 0 2px 6px rgba(0, 0, 0, 0.25);
+}
+
+/* Header navigation responsive adjustments */
+.header-nav {
+  display: flex;
+  align-items: center;
+}
+
+/* On narrow and medium screens, make nav compact and show pipe separators */
+@media (max-width: 1024px) {
+  .header-nav {
+    gap: 0.5rem;
+  }
+
+  .header-nav .header-link {
+    background: transparent;
+    color: #fff;
+    font-weight: 700;
+    padding: 0.25rem 0.4rem;
+    border-radius: 0.25rem;
+    box-shadow: none;
+    border: none;
+  }
+
+  /* add pipe separator using pseudo-element on links except the last one */
+  .header-nav .header-link:not(:last-child)::after {
+    content: "|";
+    margin-left: 0.5rem;
+    color: rgba(255,255,255,0.9);
+    opacity: 0.95;
+  }
+
+  /* slightly smaller logo/title on small screens to free space */
+  header nav div:first-child .font-extrabold {
+    font-size: 0.9rem;
+    letter-spacing: 0.02em;
+  }
 }
 
 /* Reusable 3D buttons for CTAs */

@@ -16,31 +16,31 @@ export default function FacultiesPage() {
   return (
     <div className="space-y-8">
       <header className="space-y-2">
-        <h1 className="text-3xl font-bold text-blue-700">Faculties</h1>
-        <p className="text-sm text-gray-600 max-w-2xl">Dedicated clinically experienced faculty guiding students with practical exposure and ethical focus.</p>
-        <div className="text-xs text-gray-500 space-y-1">
-          <p>Total Faculties including Guest Faculty: {site.stats?.totalFaculties}</p>
-          <p>Total intake of Students per course: {site.stats?.studentIntakePerCourse}</p>
-          <p>Teacher Students ratio: {site.stats?.teacherStudentRatio}</p>
+        <h1 className="text-3xl font-bold text-slate-900">Faculties</h1>
+  <p className="text-sm text-white max-w-2xl">Dedicated clinically experienced faculty guiding students with practical exposure and ethical focus.</p>
+        <div className="inline-block bg-white p-4 rounded-md shadow-md ring-1 ring-slate-200 text-slate-900 space-y-1">
+          <p className="text-sm font-medium">Total Faculties including Guest Faculty: <span className="font-semibold">{site.stats?.totalFaculties}</span></p>
+          <p className="text-sm font-medium">Total intake of Students per course: <span className="font-semibold">{site.stats?.studentIntakePerCourse}</span></p>
+          <p className="text-sm font-medium">Teacher Students ratio: <span className="font-semibold">{site.stats?.teacherStudentRatio}</span></p>
         </div>
       </header>
       {sections.map(section => (
         <section key={section.key} className="space-y-4">
-          <h2 className="text-2xl font-semibold text-blue-600">{section.title}</h2>
+          <h2 className="text-2xl font-semibold text-slate-900">{section.title}</h2>
           <div className="grid md:grid-cols-2 gap-6">
             {(site.faculties as any)[section.key]?.map((f: any) => (
-              <div key={f.name} className="rounded-xl border bg-white p-5 shadow hover:shadow-lg transition">
+              <div key={f.name} className="rounded-xl border p-5 shadow hover:shadow-lg transition bg-gradient-to-r from-white to-sky-50">
                 <div className="flex items-center gap-4">
-                  <div className="h-16 w-16 rounded-full bg-blue-50 border flex items-center justify-center font-semibold text-blue-700 text-sm">
+                  <div className="h-16 w-16 rounded-full bg-gradient-to-br from-indigo-600 to-indigo-900 border flex items-center justify-center font-semibold text-white text-sm">
                     {f.name.split(" ").slice(0,2).map((p: string)=>p[0]).join("")}
                   </div>
                   <div className="space-y-1 text-sm">
-                    <p className="font-semibold text-blue-700 leading-tight">{f.name}</p>
-                    <p className="text-gray-700 leading-tight">{f.designation}</p>
-                    <p className="text-gray-600 leading-tight text-xs">{f.qualification}</p>
+                    <p className="font-semibold text-slate-900 leading-tight">{f.name}</p>
+                    <p className="text-slate-800 leading-tight">{f.designation}</p>
+                    <p className="text-slate-600 leading-tight text-xs">{f.qualification}</p>
                   </div>
                 </div>
-                <div className="mt-3 space-y-1 text-xs text-gray-600">
+                <div className="mt-3 space-y-1 text-xs text-slate-700">
                   {f.specialization && <p><span className="font-medium">Specialization:</span> {f.specialization}</p>}
                   {f.experience && <p><span className="font-medium">Experience:</span> {f.experience}</p>}
                 </div>

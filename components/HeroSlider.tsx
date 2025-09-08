@@ -9,6 +9,7 @@ type Props = {
   subtitle?: string;
   heightClass?: string; // e.g., "h-[360px]"
   intervalMs?: number;
+  cta?: React.ReactNode;
 };
 
 export default function HeroSlider({
@@ -17,6 +18,7 @@ export default function HeroSlider({
   subtitle,
   heightClass = "h-[360px]",
   intervalMs = 3500,
+  cta,
 }: Props) {
   const slides = useMemo(() => (images && images.length ? images : ["/images/hero.jpg"]), [images]);
   const [idx, setIdx] = useState(0);
@@ -57,11 +59,12 @@ export default function HeroSlider({
       {/* Overlay for contrast */}
       <div className="absolute inset-0 bg-black/50" />
 
-      {/* Text */}
+    {/* Text */}
       <div className="absolute inset-0 flex items-center">
         <div className="px-6 md:px-10">
           <h1 className="text-4xl md:text-5xl font-bold text-white drop-shadow">{title}</h1>
           {subtitle ? <p className="mt-3 text-white/90 text-lg">{subtitle}</p> : null}
+      {cta ? <div className="mt-6">{cta}</div> : null}
         </div>
       </div>
 

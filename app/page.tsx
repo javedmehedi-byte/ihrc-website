@@ -7,7 +7,16 @@ export default function HomePage() {
   return (
     <main className="space-y-12">
       {/* HERO */}
-  <HeroSlider images={site.hero.images ?? [site.hero.image]} title={site.name} subtitle={site.tagline} />
+  <HeroSlider
+        images={site.hero.images ?? [site.hero.image]}
+        title={site.name}
+        subtitle={site.tagline}
+        cta={
+          <a href="/admissions/apply" className="btn-accent">
+            Apply Now
+          </a>
+        }
+      />
 
       {/* COURSES */}
       <section className="space-y-4">
@@ -48,6 +57,7 @@ export default function HomePage() {
           ))}
         </div>
       </section>
+
 
       {/* ABOUT / CAMPUS */}
       <section className="rounded-2xl border bg-white shadow p-6 flex flex-col md:flex-row items-center gap-6">

@@ -183,6 +183,17 @@ export const site = {
       "Our labs and teaching facilities are designed to mirror real hospital workflows, preparing students for immediate employability.",
       "Experienced faculties, structured internships, and strong hospital partnerships support successful careers in healthcare."
     ].join("\n"),
+  vision:
+    "To be a nationally recognised centre of excellence in paramedical education and applied healthcare training. We aspire to cultivate a generation of compassionate, technically proficient, and ethically grounded healthcare professionals who lead improvements in patient care, adapt to evolving medical technologies, and contribute to healthier communities through service and innovation.",
+  mission:
+    "Deliver high-quality, practice-oriented paramedical education that blends rigorous academics with extensive clinical exposure. We commit to maintaining modern simulation and laboratory facilities, strong hospital partnerships for internships, continuous faculty development, and an outcomes-driven curriculum that emphasises patient safety, professionalism, research literacy, and employability. Through community outreach and inclusive admissions, we aim to expand access to healthcare training and produce graduates prepared to meet the region's healthcare needs.",
+  missionPoints: [
+    "Provide quality education and training in paramedical sciences through a competency-based curriculum, experienced faculty, and hands-on clinical exposure.",
+    "Develop skilled and compassionate healthcare professionals who are committed to patient care, ethical practice, and lifelong learning.",
+    "Promote research and innovation in allied health sciences to strengthen evidence-based practice and improve healthcare delivery.",
+    "Collaborate with hospitals, universities, and healthcare institutions to ensure continuous professional development and career opportunities for students.",
+    "Contribute to community health by engaging in outreach programs, preventive care initiatives, and awareness campaigns, especially in Manipur and Northeast India.",
+  ],
   facilities: [
     {
       title: "Own Advanced Lab",
@@ -354,8 +365,8 @@ export const site = {
     ],
   },
   stats: {
-    totalFaculties: 9,
-    studentIntakePerCourse: 15,
-    teacherStudentRatio: "1:3.2",
+  totalFaculties: 15,
+  studentIntakePerCourse: 15,
+  teacherStudentRatio: "1:3",
   },
 };
