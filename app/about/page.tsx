@@ -50,7 +50,7 @@ export default function AboutPage() {
         <div className="rounded-xl border p-6 shadow-sm bg-gradient-to-r from-violet-50 to-white">
           <h3 className="text-xl font-semibold mb-2 text-slate-900">Background</h3>
           <p className="text-slate-800 whitespace-pre-line text-justified">
-            The Academic Board of IHRC Paramedical College is constituted pursuant to the decision of the Board of Directors of Imphal Hospital & Research Centre Pvt. Ltd. on 15 July 2015 (Ref. No. IHRC/VOL-4-2025-261). The Board's objective is to ensure academic excellence, compliance with affiliating university norms, and adherence to statutory guidelines.
+            The Academic Board of IHRC Paramedical College is constituted pursuant to the decision of the Board of Directors of Imphal Hospital & Research Centre Pvt. Ltd. on 15 July 2015 (Ref. No. IHRC/VOL-4-2025-261). The Board&apos;s objective is to ensure academic excellence, compliance with affiliating university norms, and adherence to statutory guidelines.
           </p>
 
           <h3 className="text-xl font-semibold mt-4 mb-2 text-slate-900">Members</h3>

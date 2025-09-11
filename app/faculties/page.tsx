@@ -1,5 +1,20 @@
 import { site } from "@/config/site";
 
+type Faculty = {
+  name: string;
+  designation: string;
+  qualification?: string;
+  specialization?: string;
+  experience?: string;
+};
+
+type FacultySections = {
+  dean?: Faculty[];
+  medicalLab?: Faculty[];
+  operationTheatre?: Faculty[];
+  dialysis?: Faculty[];
+};
+
 export const metadata = {
   title: `Faculties | ${site.name}`,
   description: "Faculty profiles organized by department",
@@ -24,11 +39,11 @@ export default function FacultiesPage() {
           <p className="text-sm font-medium">Teacher Students ratio: <span className="font-semibold">{site.stats?.teacherStudentRatio}</span></p>
         </div>
       </header>
-      {sections.map(section => (
+  {sections.map(section => (
         <section key={section.key} className="space-y-4">
           <h2 className="text-2xl font-semibold text-slate-900">{section.title}</h2>
           <div className="grid md:grid-cols-2 gap-6">
-            {(site.faculties as any)[section.key]?.map((f: any) => (
+    {(site.faculties as FacultySections)[section.key as keyof FacultySections]?.map((f: Faculty) => (
               <div key={f.name} className="rounded-xl border p-5 shadow hover:shadow-lg transition bg-gradient-to-r from-white to-sky-50">
                 <div className="flex items-center gap-4">
                   <div className="h-16 w-16 rounded-full bg-gradient-to-br from-indigo-600 to-indigo-900 border flex items-center justify-center font-semibold text-white text-sm">
