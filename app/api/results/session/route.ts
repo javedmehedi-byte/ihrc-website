@@ -1,15 +1,10 @@
 import { NextResponse } from "next/server";
-import { db } from "@/lib/db";
-import { isAdmin } from "@/lib/auth";
 
+// Results feature removed. Return 410 Gone to indicate the endpoint is deprecated.
 export async function GET() {
-  const items = await db.resultSession.findMany({ orderBy: { createdAt: "desc" } });
-  return NextResponse.json({ items });
+  return NextResponse.json({ error: "Results endpoint removed" }, { status: 410 });
 }
 
-export async function POST(req: Request) {
-  if (!(await isAdmin())) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
-  const data = await req.json();
-  const item = await db.resultSession.create({ data });
-  return NextResponse.json(item);
+export async function POST() {
+  return NextResponse.json({ error: "Results endpoint removed" }, { status: 410 });
 }
